@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,6 +37,8 @@ public class Medico {
     @Embedded
     private Endereco endereco;
 
+    private Boolean ativo;
+
     public Medico(CreateMedicosDto medicosDto) {
         this.nome = medicosDto.nome();
         this.email = medicosDto.email();
@@ -43,5 +46,24 @@ public class Medico {
         this.crm = medicosDto.crm();
         this.especialidade = medicosDto.especialidade();
         this.endereco = new Endereco(medicosDto.endereco());
+        this.ativo = true;
     }
+
+    public void atalizarInformacoes(UpdateMedicoDto dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+    }
+
+    //Exclusão lógica
+    public void deletar() {
+        this.ativo = false;
+    }
+
 }

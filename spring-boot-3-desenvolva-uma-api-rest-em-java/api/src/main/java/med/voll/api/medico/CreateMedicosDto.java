@@ -8,19 +8,11 @@ import jakarta.validation.constraints.Pattern;
 import med.voll.api.endereco.CreateEnderecoDto;
 
 public record CreateMedicosDto(
-        @NotBlank
-        String nome,
-        @NotBlank
-        @Email
-        String email,
-        @NotBlank
-        String telefone,
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
-        String crm, 
-        @NotNull
-        Especialidade especialidade,
-        @NotNull 
-        @Valid 
-        CreateEnderecoDto endereco) {
+                @NotBlank String nome,
+                @NotBlank @Email String email,
+                @NotBlank String telefone,
+                @NotBlank @Pattern(regexp = "\\d{4,6}") String crm,
+                @NotNull Especialidade especialidade,
+                @NotNull @Valid CreateEnderecoDto endereco
+                ) {
 }
